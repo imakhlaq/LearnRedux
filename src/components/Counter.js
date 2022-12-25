@@ -6,7 +6,9 @@ const Counter = () => {
   //using context
   const ctx = useContext(counterContext);
 
-  const toggleCounterHandler = () => {};
+  const toggleCounterHandler = () => {
+    ctx.toggleCounter();
+  };
 
   const decreaseHandler = (e) => {
     e.preventDefault();
@@ -24,7 +26,7 @@ const Counter = () => {
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      <div className={classes.value}>{ctx.counter}</div>
+      {ctx.toggle && <div className={classes.value}>{ctx.counter}</div>}
       <button onClick={toggleCounterHandler}>Toggle Counter</button>
       <button onClick={decreaseHandler}>Decrease</button>
       <button onClick={increaseHandler}>Increase</button>
