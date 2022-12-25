@@ -1,32 +1,33 @@
 import classes from "./Counter.module.css";
-import counterContext from "../store/with context/context_counter";
-import { useContext } from "react";
+
+//for getting the state
+import { useSelector } from "react-redux";
+//for dispatching a action
+import { useDispatch } from "react-redux";
 
 const Counter = () => {
-  //using context
-  const ctx = useContext(counterContext);
+  //getting state
+  const counter = useSelector((state) => state.counter);
+
+  const toggle = useSelector((state) => state.toggle);
+
+  const dispatch = useDispatch();
 
   const toggleCounterHandler = () => {
-    ctx.toggleCounter();
+    dispatch({ type: "toggle" });
   };
 
-  const decreaseHandler = (e) => {
-    e.preventDefault();
-
-    //functions in the context
-    ctx.decreaseCounter();
+  const decreaseHandler = () => {
+    dispatch({ type: "dec" });
   };
 
-  const increaseHandler = (e) => {
-    e.preventDefault();
-
-    //functions in the context
-    ctx.increaseCounter();
+  const increaseHandler = () => {
+    dispatch({ type: "inc" });
   };
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      {ctx.toggle && <div className={classes.value}>{ctx.counter}</div>}
+      {toggle && <div className={classes.value}>{counter}</div>}
       <button onClick={toggleCounterHandler}>Toggle Counter</button>
       <button onClick={decreaseHandler}>Decrease</button>
       <button onClick={increaseHandler}>Increase</button>
