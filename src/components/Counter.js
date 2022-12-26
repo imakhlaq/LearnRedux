@@ -5,24 +5,27 @@ import { useSelector } from "react-redux";
 //for dispatching a action
 import { useDispatch } from "react-redux";
 
+//import the slice.action
+import { counterAction } from "../store/with_reduxtoolKit/counterSlice";
+
 const Counter = () => {
   //getting state
-  const counter = useSelector((state) => state.counter);
+  const counter = useSelector((state) => state.counter.counter);
 
-  const toggle = useSelector((state) => state.toggle);
+  const toggle = useSelector((state) => state.counter.toggle);
 
   const dispatch = useDispatch();
 
   const toggleCounterHandler = () => {
-    dispatch({ type: "toggle" });
+    dispatch(counterAction.toggle()); //can pass objet in the toggle and it will be availabe in action.payload
   };
 
   const decreaseHandler = () => {
-    dispatch({ type: "dec" });
+    dispatch(counterAction.decrease());
   };
 
   const increaseHandler = () => {
-    dispatch({ type: "inc" });
+    dispatch(counterAction.increament());
   };
   return (
     <main className={classes.counter}>
